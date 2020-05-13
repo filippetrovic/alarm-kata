@@ -26,6 +26,9 @@ public class AlarmUnitTest {
   @Mock
   private SmsService smsService;
 
+  @Mock
+  private AlarmAuditService alarmAuditService;
+
   @InjectMocks
   private Alarm alarm;
 
@@ -56,6 +59,21 @@ public class AlarmUnitTest {
     // Then
     verify(smsService)
         .sendWarningSms(anyInt());
+
+  }
+
+  @Test
+  public void shouldLogAlarmOccurrenceAt10h01m() {
+    // Given
+    when(timeProvider.currentTime())
+        .thenReturn(LocalTime.of(10, 1));
+
+    // When
+    alarm.checkForAlarm();
+
+    // Then
+    verify(alarmAuditService)
+        .logAlarmOccurrence(anyInt());
 
   }
 
