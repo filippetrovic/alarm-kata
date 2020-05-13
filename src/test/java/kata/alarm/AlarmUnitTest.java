@@ -23,6 +23,9 @@ public class AlarmUnitTest {
   @Mock
   private TimeProvider timeProvider;
 
+  @Mock
+  private SmsService smsService;
+
   @InjectMocks
   private Alarm alarm;
 
@@ -38,6 +41,21 @@ public class AlarmUnitTest {
     // Then
     verify(emailService)
         .sendWarningEmail(anyInt());
+
+  }
+
+  @Test
+  public void shouldSendSmsAt10h01m() {
+    // Given
+    when(timeProvider.currentTime())
+        .thenReturn(LocalTime.of(10, 1));
+
+    // When
+    alarm.checkForAlarm();
+
+    // Then
+    verify(smsService)
+        .sendWarningSms(anyInt());
 
   }
 

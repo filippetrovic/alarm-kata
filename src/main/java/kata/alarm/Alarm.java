@@ -6,10 +6,12 @@ public class Alarm {
 
   private final TimeProvider timeProvider;
   private final EmailService emailService;
+  private final SmsService smsService;
 
-  public Alarm(TimeProvider timeProvider, EmailService emailService) {
+  public Alarm(TimeProvider timeProvider, EmailService emailService, SmsService smsService) {
     this.timeProvider = timeProvider;
     this.emailService = emailService;
+    this.smsService = smsService;
   }
 
   public int checkForAlarm() {
@@ -20,6 +22,7 @@ public class Alarm {
 
     if (elapsed >= 500) {
       emailService.sendWarningEmail(elapsed);
+      smsService.sendWarningSms(elapsed);
     }
 
     return elapsed;
