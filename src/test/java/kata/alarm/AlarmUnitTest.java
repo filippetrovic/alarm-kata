@@ -74,6 +74,20 @@ public class AlarmUnitTest {
   }
 
   @Test
+  public void shouldNotSendSmsAt01h01m() {
+    // Given
+    when(timeProvider.currentTime())
+        .thenReturn(LocalTime.of(1, 1));
+
+    // When
+    alarm.checkForAlarm();
+
+    // Then
+    verify(smsService, never())
+        .sendWarningSms(anyInt());
+  }
+
+  @Test
   public void shouldReturnElapsedTimeInMinutesSinceMidnight() {
     // Given
     when(timeProvider.currentTime())
