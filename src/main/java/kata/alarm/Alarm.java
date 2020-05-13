@@ -7,6 +7,8 @@ public class Alarm {
   private final TimeProvider timeProvider;
   private final AlarmListener alarmListener;
 
+  private boolean snooze;
+
   public Alarm(TimeProvider timeProvider, AlarmListener alarmListener) {
     this.timeProvider = timeProvider;
     this.alarmListener = alarmListener;
@@ -16,7 +18,7 @@ public class Alarm {
 
     final int elapsed = getInputs();
 
-    if (shouldGoOff(elapsed)) {
+    if (shouldGoOff(elapsed) && !snooze) {
       alarmListener.notify(elapsed);
     }
 
@@ -34,4 +36,7 @@ public class Alarm {
     return elapsed >= 500;
   }
 
+  public void snooze() {
+    this.snooze = true;
+  }
 }
