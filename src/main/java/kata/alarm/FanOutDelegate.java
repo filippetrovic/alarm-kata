@@ -16,8 +16,8 @@ public class FanOutDelegate implements AlarmListener {
 
   @Override
   public void notify(int elapsed) {
-    emailService.sendWarningEmail(elapsed);
-    smsService.sendWarningSms(elapsed);
-    auditService.logAlarmOccurrence(elapsed);
+    emailService.notify(elapsed);
+    smsService.notify(elapsed);
+    auditService.notify(elapsed);
   }
 }

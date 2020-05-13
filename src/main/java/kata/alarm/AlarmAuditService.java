@@ -2,7 +2,7 @@ package kata.alarm;
 
 public class AlarmAuditService {
 
-  public void logAlarmOccurrence(int elapsed) {
+  public void notify(int elapsed) {
     // asd
   }
 }

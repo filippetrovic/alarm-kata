@@ -52,7 +52,7 @@ public class AlarmUnitTest {
 
     // Then
     verify(emailService)
-        .sendWarningEmail(anyInt());
+        .notify(anyInt());
 
   }
 
@@ -67,7 +67,7 @@ public class AlarmUnitTest {
 
     // Then
     verify(smsService)
-        .sendWarningSms(anyInt());
+        .notify(anyInt());
 
   }
 
@@ -82,7 +82,7 @@ public class AlarmUnitTest {
 
     // Then
     verify(alarmAuditService)
-        .logAlarmOccurrence(anyInt());
+        .notify(anyInt());
 
   }
 
@@ -97,7 +97,7 @@ public class AlarmUnitTest {
 
     // Then
     verify(emailService, never())
-        .sendWarningEmail(anyInt());
+        .notify(anyInt());
   }
 
   @Test
@@ -111,7 +111,7 @@ public class AlarmUnitTest {
 
     // Then
     verify(smsService, never())
-        .sendWarningSms(anyInt());
+        .notify(anyInt());
   }
 
   @Test
