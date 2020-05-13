@@ -5,9 +5,9 @@ import java.time.LocalTime;
 public class Alarm {
 
   private final TimeProvider timeProvider;
-  private final FanOutDelegate alarmListener;
+  private final AlarmListener alarmListener;
 
-  public Alarm(TimeProvider timeProvider, FanOutDelegate alarmListener) {
+  public Alarm(TimeProvider timeProvider, AlarmListener alarmListener) {
     this.timeProvider = timeProvider;
     this.alarmListener = alarmListener;
   }
