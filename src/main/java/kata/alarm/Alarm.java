@@ -5,34 +5,37 @@ import java.time.LocalTime;
 public class Alarm {
 
   private final TimeProvider timeProvider;
-  private final EmailService emailService;
-  private final SmsService smsService;
-  private final AlarmAuditService auditService;
+  private final FanOutDelegate alarmListener;
 
   public Alarm(TimeProvider timeProvider,
                EmailService emailService,
                SmsService smsService,
                AlarmAuditService auditService) {
+
     this.timeProvider = timeProvider;
-    this.emailService = emailService;
-    this.smsService = smsService;
-    this.auditService = auditService;
+    this.alarmListener = new FanOutDelegate(emailService, smsService, auditService);
   }
 
   public int checkForAlarm() {
 
-    final LocalTime now = timeProvider.currentTime();
+    final int elapsed = getInputs();
 
-    final int elapsed = (now.getHour() * 60 ) + now.getMinute();
-
-    if (elapsed >= 500) {
-      emailService.sendWarningEmail(elapsed);
-      smsService.sendWarningSms(elapsed);
-      auditService.logAlarmOccurrence(elapsed);
+    if (shouldGoOff(elapsed)) {
+      alarmListener.notify(elapsed);
     }
 
     return elapsed;
 
+  }
+
+  private int getInputs() {
+    final LocalTime now = timeProvider.currentTime();
+
+    return (now.getHour() * 60 ) + now.getMinute();
+  }
+
+  private boolean shouldGoOff(int elapsed) {
+    return elapsed >= 500;
   }
 
 }
