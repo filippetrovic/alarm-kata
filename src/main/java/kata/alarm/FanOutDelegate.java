@@ -2,9 +2,9 @@ package kata.alarm;
 
 public class FanOutDelegate implements AlarmListener {
 
-  final EmailService emailService;
-  final SmsService smsService;
-  final AlarmAuditService auditService;
+  private final EmailService emailService;
+  private final SmsService smsService;
+  private final AlarmAuditService auditService;
 
   public FanOutDelegate(EmailService emailService,
                         SmsService smsService,
