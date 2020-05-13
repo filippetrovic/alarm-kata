@@ -7,13 +7,9 @@ public class Alarm {
   private final TimeProvider timeProvider;
   private final FanOutDelegate alarmListener;
 
-  public Alarm(TimeProvider timeProvider,
-               EmailService emailService,
-               SmsService smsService,
-               AlarmAuditService auditService) {
-
+  public Alarm(TimeProvider timeProvider, FanOutDelegate alarmListener) {
     this.timeProvider = timeProvider;
-    this.alarmListener = new FanOutDelegate(emailService, smsService, auditService);
+    this.alarmListener = alarmListener;
   }
 
   public int checkForAlarm() {

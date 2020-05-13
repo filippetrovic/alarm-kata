@@ -1,8 +1,8 @@
 package kata.alarm;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
@@ -29,8 +29,17 @@ public class AlarmUnitTest {
   @Mock
   private AlarmAuditService alarmAuditService;
 
-  @InjectMocks
   private Alarm alarm;
+
+  @Before
+  public void setUp() {
+    alarm = new Alarm(
+        timeProvider,
+        new FanOutDelegate(
+            emailService,
+            smsService,
+            alarmAuditService));
+  }
 
   @Test
   public void shouldSendEmailAt10h01m() {
