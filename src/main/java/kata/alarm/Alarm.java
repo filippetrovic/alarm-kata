@@ -18,12 +18,16 @@ public class Alarm {
 
     final int elapsed = getInputs();
 
-    if (shouldGoOff(elapsed) && !snooze) {
+    if (shouldGoOff(elapsed) && snoozed()) {
       alarmListener.notify(elapsed);
     }
 
     return elapsed;
 
+  }
+
+  private boolean snoozed() {
+    return !snooze;
   }
 
   private int getInputs() {
