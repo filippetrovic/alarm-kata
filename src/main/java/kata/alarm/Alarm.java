@@ -22,7 +22,7 @@ public class Alarm {
       return elapsed;
     }
 
-    if (shouldGoOff(elapsed) && notSnoozed()) {
+    if (shouldGoOff(elapsed)) {
       alarmListener.notify(elapsed);
     }
 
@@ -32,10 +32,6 @@ public class Alarm {
 
   private boolean snoozed() {
     return snooze;
-  }
-
-  private boolean notSnoozed() {
-    return !snooze;
   }
 
   private int getInputs() {
