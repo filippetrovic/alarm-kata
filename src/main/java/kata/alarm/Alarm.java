@@ -46,6 +46,9 @@ public class Alarm {
   }
 
   private boolean snoozed() {
-    return snooze;
+    if (!snooze) {
+      return false;
+    }
+    return true;
   }
 }
