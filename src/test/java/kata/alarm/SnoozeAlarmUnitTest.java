@@ -45,4 +45,23 @@ public class SnoozeAlarmUnitTest {
     verify(listener, never())
         .notify(anyInt());
   }
+
+  @Test
+  public void shouldGoOffAfterSnoozeExpires() {
+    // Given
+    when(timeProvider.currentTime())
+        .thenReturn(LocalTime.of(12, 00));
+
+    alarm.snoozeFor(Duration.ofMinutes(5));
+
+    when(timeProvider.currentTime())
+        .thenReturn(LocalTime.of(12, 06));
+
+    // When
+    alarm.checkForAlarm();
+
+    // Then
+    verify(listener)
+        .notify(anyInt());
+  }
 }

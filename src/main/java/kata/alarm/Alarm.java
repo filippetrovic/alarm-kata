@@ -9,6 +9,8 @@ public class Alarm {
   private final AlarmListener alarmListener;
 
   private boolean snooze;
+  private Duration snoozeDuration;
+  private LocalTime snoozeTime;
 
   public Alarm(TimeProvider timeProvider, AlarmListener alarmListener) {
     this.timeProvider = timeProvider;
@@ -42,6 +44,8 @@ public class Alarm {
   }
 
   public void snoozeFor(Duration duration) {
+    this.snoozeDuration = duration;
+    this.snoozeTime = timeProvider.currentTime();
     this.snooze = true;
   }
 
@@ -49,6 +53,7 @@ public class Alarm {
     if (!snooze) {
       return false;
     }
-    return true;
+
+    return snoozeTime.plus(snoozeDuration).isAfter(timeProvider.currentTime());
   }
 }
