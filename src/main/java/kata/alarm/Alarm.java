@@ -1,5 +1,6 @@
 package kata.alarm;
 
+import java.time.Duration;
 import java.time.LocalTime;
 
 public class Alarm {
@@ -40,7 +41,7 @@ public class Alarm {
     return elapsed >= 500;
   }
 
-  public void snooze() {
+  public void snoozeFor(Duration duration) {
     this.snooze = true;
   }
 

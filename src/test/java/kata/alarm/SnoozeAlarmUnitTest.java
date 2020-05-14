@@ -6,6 +6,7 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
+import java.time.Duration;
 import java.time.LocalTime;
 
 import static org.mockito.ArgumentMatchers.anyInt;
@@ -35,7 +36,7 @@ public class SnoozeAlarmUnitTest {
     when(timeProvider.currentTime())
         .thenReturn(LocalTime.of(12, 0));
 
-    alarm.snooze();
+    alarm.snoozeFor(Duration.ofMinutes(5));
 
     // When
     alarm.checkForAlarm();
