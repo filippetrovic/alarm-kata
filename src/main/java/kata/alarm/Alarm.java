@@ -30,10 +30,6 @@ public class Alarm {
 
   }
 
-  private boolean snoozed() {
-    return snooze;
-  }
-
   private int getInputs() {
     final LocalTime now = timeProvider.currentTime();
 
@@ -46,5 +42,9 @@ public class Alarm {
 
   public void snooze() {
     this.snooze = true;
+  }
+
+  private boolean snoozed() {
+    return snooze;
   }
 }
