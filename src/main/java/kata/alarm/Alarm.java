@@ -18,7 +18,7 @@ public class Alarm {
 
     final int elapsed = getInputs();
 
-    if (!notSnoozed()) {
+    if (snoozed()) {
       return elapsed;
     }
 
@@ -28,6 +28,10 @@ public class Alarm {
 
     return elapsed;
 
+  }
+
+  private boolean snoozed() {
+    return snooze;
   }
 
   private boolean notSnoozed() {
